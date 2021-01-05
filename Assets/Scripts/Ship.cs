@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class Ship : MonoBehaviour
 {
@@ -10,7 +13,9 @@ public class Ship : MonoBehaviour
     public Slider healthbar;
     public GameObject explosion;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private string MainMenuScene = "MainMenu";
+
+    private async void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "asteroid")
         {
@@ -20,6 +25,9 @@ public class Ship : MonoBehaviour
                 Instantiate(explosion, this.transform.position, Quaternion.identity);
                 Destroy(healthbar.gameObject, 0.1f);
                 Destroy(this.gameObject, 0.1f);
+
+                await Task.Delay(2000);
+                SceneManager.LoadScene(MainMenuScene);
             }
         }
     }
@@ -41,7 +49,7 @@ public class Ship : MonoBehaviour
             }
         }
 
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(this.transform.position) + new Vector3(0, -100, 0);
+        Vector3 screenPos = this.transform.position + new Vector3(0.09f, -0.4f, 0);
         healthbar.transform.position = screenPos;
     }
 }
