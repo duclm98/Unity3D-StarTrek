@@ -59,10 +59,4 @@ public class Pool : MonoBehaviour
             }
         }
     }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        
-    }
 }

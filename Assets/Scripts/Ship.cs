@@ -12,7 +12,8 @@ public class Ship : MonoBehaviour
     public GameObject bullet;
     public Slider healthbar;
     public GameObject explosion;
-    private string MainMenuScene = "MainMenu";
+
+    HandlingList handlingList = new HandlingList();
 
     private void Update()
     {
@@ -36,7 +37,7 @@ public class Ship : MonoBehaviour
         healthbar.transform.position = screenPos;
     }
 
-    private async void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "asteroid")
         {
@@ -45,13 +46,16 @@ public class Ship : MonoBehaviour
 
             if (healthbar.value <= 0)
             {
-                SoundManager.PlaySound("boom2");
-                Instantiate(explosion, this.transform.position, Quaternion.identity);
-                Destroy(healthbar.gameObject, 0.1f);
-                Destroy(this.gameObject, 0.1f);
+                //SoundManager.PlaySound("boom2");
+                //Instantiate(explosion, this.transform.position, Quaternion.identity);
+                //Destroy(healthbar.gameObject, 0.1f);
+                //Destroy(this.gameObject, 0.1f);
 
-                await Task.Delay(2000);
-                SceneManager.LoadScene(MainMenuScene);
+                //await Task.Delay(2000);
+                //SceneManager.LoadScene("MainMenu");
+
+                handlingList.setHandlingStrategy(new LossHandling());
+                handlingList.handle(this.gameObject, explosion, healthbar);
             }
         }
     }
