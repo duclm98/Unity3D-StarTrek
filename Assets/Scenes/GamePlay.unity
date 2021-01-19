@@ -473,8 +473,10 @@ MonoBehaviour:
   items:
   - prefab: {fileID: 7875831664561092528, guid: 198142f83a367f341aaeb464debda429, type: 3}
     amount: 5
+    expandable: 0
   - prefab: {fileID: 3617823828984426384, guid: 39e6b048789fb7749ae51229bce83ae4, type: 3}
     amount: 5
+    expandable: 1
   pooledItems: []
 --- !u!1 &945591534
 GameObject:

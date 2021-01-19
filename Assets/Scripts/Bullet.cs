@@ -18,7 +18,8 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.tag == "asteroid")
         {
             SoundManager.PlaySound("boom1");
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
+            collision.gameObject.SetActive(false);
             this.gameObject.SetActive(false);
         }
     }
